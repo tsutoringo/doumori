@@ -1,7 +1,7 @@
 require('dotenv').config();
 const events = require('./events');
 const config = require('./config');
-const getNowBGMStream = require('./Utils/getNowBGMStream');
+const getNowBGM = require('./Utils/getNowBGM');
 
 const moment = require('moment');
 
@@ -21,14 +21,14 @@ bot.on('voiceChannelJoin', (member, channel) => {
 		if(connection.playing) { // Stop playing if the connection is playing something
 			return;
 		}
-		connection.play(getNowBGMStream(channel.name), {
+		connection.play(getNowBGM(channel.name), {
 			inputArgs: [
 				'-ss',
 				`00:${moment().minutes()}:${moment().seconds()}`
 			]
 		});
 		connection.on('end', () => {
-			connection.play(getNowBGMStream(channel.name), {
+			connection.play(getNowBGM(channel.name), {
 				inputArgs: [
 					'-ss',
 					`00:${moment().minutes()}:${moment().seconds()}`
